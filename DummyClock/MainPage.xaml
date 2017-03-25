@@ -29,7 +29,18 @@
         </Grid>
 
         <!-- Top-left Grid -->
-        <Grid x:Name="TopRightGrid" Background="Black" Grid.Column="1" HorizontalAlignment="Left" Height="240" VerticalAlignment="Top" Width="400"/>
+        <Grid x:Name="TopRightGrid" Background="Black" Grid.Column="1" HorizontalAlignment="Left" Height="240" VerticalAlignment="Top" Width="400">
+            <ListView x:Name="TimetableList" HorizontalAlignment="Left" Height="231" Margin="10,9,0,0" VerticalAlignment="Top" Width="380">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding TitleString}" FontSize="12" FontWeight="SemiBold" Foreground="SandyBrown" Margin="0,0,0,5"/>
+                            <TextBlock Text="{Binding DetailedString}" FontSize="10" Foreground="White"  Opacity="0.9" Margin="0,0,0,5"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
 
         <!-- Bottom-left Grid -->
         <Grid x:Name="BottomLeftGrid" Background="Black" HorizontalAlignment="Left" Height="240" VerticalAlignment="Top" Width="400" Grid.Row="1"/>

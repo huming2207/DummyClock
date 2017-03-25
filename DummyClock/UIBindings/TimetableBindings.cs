@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace DummyClock.UIBindings
 {
-    class TimetableBindings
+    public sealed class TimetableBindings
     {
+        public string TitleString { get; set; }
+        public string DetailedString { get; set; }
     }
 }
