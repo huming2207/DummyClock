@@ -16,20 +16,25 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using RmiterCoreUwp;
 using RmiterCoreUwp.MyRmit;
+using Windows.ApplicationModel.Core;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace DummyClock
 {
+    
+
+    
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private Timer RmiterTimetableTimer;
         public MainPage()
         {
             this.InitializeComponent();
-            var RmiterTimetableTimer = new Timer(RmitTimetableScheduleCallback, null, 5000, (int)TimeSpan.FromHours(1).TotalMilliseconds);
+            RmiterTimetableTimer = new Timer(RmitTimetableScheduleCallback, null, 0, (int)TimeSpan.FromHours(1).TotalMilliseconds);
         }
 
         public async void RmitTimetableScheduleCallback(object state)
@@ -62,7 +67,7 @@ namespace DummyClock
                 timetableListContent.Add(tableContent);
             }
 
-            await Window.Current.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
                 () =>
                 {
                     TimetableList.ItemsSource = timetableListContent;
