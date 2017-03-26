@@ -21,15 +21,17 @@
             <ColumnDefinition Width="200*"/>
         </Grid.ColumnDefinitions>
 
+        
         <!-- Top-left Grid -->
         <Grid x:Name="TopLeftGrid" Background="Black" HorizontalAlignment="Left" Height="240" VerticalAlignment="Top" Width="400">
             <TextBlock x:Name="MainTimeTextblock" HorizontalAlignment="Left" Height="141" Margin="28,0,0,0" TextWrapping="Wrap" Text="00 : 00"  VerticalAlignment="Top" Width="344" Foreground="White" TextAlignment="Center" FontSize="100" />
             <TextBlock HorizontalAlignment="Left" Margin="0,141,0,0" TextWrapping="Wrap" Text="Saturday, March 16 2017" VerticalAlignment="Top" Foreground="White" FontSize="30" Width="400" TextAlignment="Center"/>
             <TextBlock HorizontalAlignment="Left" Margin="0,181,0,0" TextWrapping="Wrap" Text="农历 x月y日" VerticalAlignment="Top" Foreground="White" FontSize="30" Width="400" TextAlignment="Center"/>
+            <Line Y1="240" Y2="240" X1="0" X2="400" Stroke="White" StrokeThickness="3" Canvas.ZIndex="1"/>
         </Grid>
 
         <!-- Top-left Grid -->
-        <StackPanel x:Name="TopRightGrid" Background="Black" Grid.Column="1" HorizontalAlignment="Center" Height="240" VerticalAlignment="Center" Width="400">
+        <Grid x:Name="TopRightGrid" Background="Black" Grid.Column="1" HorizontalAlignment="Center" Height="240" VerticalAlignment="Center" Width="400">
             <ListView x:Name="TimetableList" HorizontalAlignment="Left" Height="185" Margin="15,30,0,0" VerticalAlignment="Top" Width="380" >
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
@@ -45,13 +47,32 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </StackPanel>
+            <Line Y1="0" Y2="240" X1="0" X2="0" Stroke="White" StrokeThickness="3" Canvas.ZIndex="1"/>
+            <Line Y1="240" Y2="240" X1="0" X2="400" Stroke="White" StrokeThickness="3" Canvas.ZIndex="1"/>
+        </Grid>
 
         <!-- Bottom-left Grid -->
-        <Grid x:Name="BottomLeftGrid" Background="Black" HorizontalAlignment="Left" Height="240" VerticalAlignment="Top" Width="400" Grid.Row="1"/>
+        <StackPanel x:Name="BottomLeftGrid" Background="Black" HorizontalAlignment="Left" Height="240" VerticalAlignment="Top" Width="400" Grid.Row="1" Orientation="Horizontal">
+            <StackPanel x:Name="CurrentWeatherPanel" Width="200" Height="240" VerticalAlignment="Top">
+                <TextBlock x:Name="CurrentWeatherIconTextbox" Text="☀️" FontSize="72" TextAlignment="Center" Height="105"/>
+                <TextBlock x:Name="CurrentWeatherTempTextbox"  Text="15/25℃" FontSize="39" Foreground="White" TextAlignment="Center"/>
+                <TextBlock x:Name="CurrentWeatherDetailedTextbox" Text="Sunny" Foreground="White" TextAlignment="Center" FontSize="30"/>
+            </StackPanel>
+
+            <StackPanel x:Name="TomorrowWeatherPanel" Width="200" Height="240"  VerticalAlignment="Bottom">
+                <TextBlock x:Name="TomorrowWeatherIconTextbox" Text="🌧️" FontSize="72" TextAlignment="Center" Height="105"/>
+                <TextBlock x:Name="TomorrowWeatherTempTextbox"  Text="15/25℃" FontSize="39" Foreground="White" TextAlignment="Center"/>
+                <TextBlock x:Name="TomorrowWeatherDetailedTextbox" Text="Rainy" Foreground="White" TextAlignment="Center" FontSize="30"/>
+            </StackPanel>
+            
+            
+        </StackPanel>
 
         <!-- Bottom-right Grid -->
-        <Grid x:Name="ButtomRightGrid" Background="Black" Grid.Column="1" HorizontalAlignment="Left" Height="240" Grid.Row="1" VerticalAlignment="Top" Width="400"/>
+        <Grid x:Name="ButtomRightGrid" Background="Black" Grid.Column="1" HorizontalAlignment="Left" Height="240" Grid.Row="1" VerticalAlignment="Top" Width="400">
+
+            <Line Y1="0" Y2="240" X1="0" X2="0" Stroke="White" StrokeThickness="3" Canvas.ZIndex="1"/>
+        </Grid>
 
     </Grid>
 </Page>

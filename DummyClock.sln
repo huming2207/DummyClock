@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PtvCore", "PtvCore\PtvCore.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RmiterCoreUwp", "Rmiter\RmiterCoreUwp\RmiterCoreUwp.csproj", "{711779A0-82BC-409A-B315-C90EE1B96966}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YahooWeatherParser", "YahooWeatherDotNet\YahooWeatherParser\YahooWeatherParser.csproj", "{01AB7075-CB81-4AD2-90F2-DC444DE09363}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,22 @@ Global
 		{711779A0-82BC-409A-B315-C90EE1B96966}.Release|x64.Build.0 = Release|x64
 		{711779A0-82BC-409A-B315-C90EE1B96966}.Release|x86.ActiveCfg = Release|x86
 		{711779A0-82BC-409A-B315-C90EE1B96966}.Release|x86.Build.0 = Release|x86
+		{01AB7075-CB81-4AD2-90F2-DC444DE09363}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01AB7075-CB81-4AD2-90F2-DC444DE09363}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01AB7075-CB81-4AD2-90F2-DC444DE09363}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{01AB7075-CB81-4AD2-90F2-DC444DE09363}.Debug|ARM.Build.0 = Debug|Any CPU
+		{01AB7075-CB81-4AD2-90F2-DC444DE09363}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{01AB7075-CB81-4AD2-90F2-DC444DE09363}.Debug|x64.Build.0 = Debug|Any CPU
+		{01AB7075-CB81-4AD2-90F2-DC444DE09363}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{01AB7075-CB81-4AD2-90F2-DC444DE09363}.Debug|x86.Build.0 = Debug|Any CPU
+		{01AB7075-CB81-4AD2-90F2-DC444DE09363}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01AB7075-CB81-4AD2-90F2-DC444DE09363}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01AB7075-CB81-4AD2-90F2-DC444DE09363}.Release|ARM.ActiveCfg = Release|Any CPU
+		{01AB7075-CB81-4AD2-90F2-DC444DE09363}.Release|ARM.Build.0 = Release|Any CPU
+		{01AB7075-CB81-4AD2-90F2-DC444DE09363}.Release|x64.ActiveCfg = Release|Any CPU
+		{01AB7075-CB81-4AD2-90F2-DC444DE09363}.Release|x64.Build.0 = Release|Any CPU
+		{01AB7075-CB81-4AD2-90F2-DC444DE09363}.Release|x86.ActiveCfg = Release|Any CPU
+		{01AB7075-CB81-4AD2-90F2-DC444DE09363}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

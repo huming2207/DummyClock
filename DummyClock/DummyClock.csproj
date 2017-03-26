@@ -132,6 +132,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PtvCore\PtvCore.csproj">
+      <Project>{49fcdb2b-476b-4af2-b112-268f8298ec6d}</Project>
+      <Name>PtvCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Rmiter\RmiterCoreUwp\RmiterCoreUwp.csproj">
       <Project>{711779a0-82bc-409a-b315-c90ee1b96966}</Project>
       <Name>RmiterCoreUwp</Name>
