@@ -17,13 +17,12 @@ using Windows.UI.Xaml.Navigation;
 using RmiterCoreUwp;
 using RmiterCoreUwp.MyRmit;
 using Windows.ApplicationModel.Core;
+using DummyClock.UIController;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace DummyClock
 {
-    
-
     
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -39,39 +38,16 @@ namespace DummyClock
 
         public async void RmitTimetableScheduleCallback(object state)
         {
-            // Initialize login object then login
-            var casLogin = new CasLogin();
-            var casResult = await casLogin.RunCasLogin(Settings.RmitID, Settings.RmitPassword);
-
-            // Initialize portal stuff
-            var portal = new MyRmitPortal(casResult.CasCookieContainer);
-            var timetableResult = await portal.GetCurrentClassTimetable();
-
-            // Get the time. In this array, Monday is 0, Sunday is 6.
-            int dayOfWeek = (int)((DateTime.Now.DayOfWeek) + 6) % 7; // Shift the day of week
-            var timetableListContent = new List<UIBindings.TimetableBindings>();
-
-            // Set to 
-            foreach (var timetableForToday in timetableResult.WeeklyTimetable[0].DailyTimetable)
-            {
-                var tableContent = new UIBindings.TimetableBindings()
-                {
-                    TitleString = string.Format("{0} - {1}", timetableForToday.Title, timetableForToday.ActivityType),
-                    DetailedString = string.Format("{0}{1}, from {2} to {3}",
-                        timetableForToday.Subject,
-                        timetableForToday.CatalogNumber,
-                        timetableForToday.StartDisplayable,
-                        timetableForToday.EndDisplayable)
-                };
-
-                timetableListContent.Add(tableContent);
-            }
+            MainPageUIController mainPageController = new MainPageUIController();
+            var uniTimetableListContent = await mainPageController.GetUniTimetables(); 
 
             await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
                 () =>
                 {
-                    TimetableList.ItemsSource = timetableListContent;
+                    TimetableList.ItemsSource = uniTimetableListContent;
                 });
         }
+
+
     }
 }

@@ -9,9 +9,11 @@ namespace DummyClock
     // 1. Change the class name to "Settings"
     // 2. Write in your account details (ensure it's on a safe place)
     // 3. Change this file name to "Settings.cs"
-    public class SettingsExample
+    public sealed class SettingsExample
     {
-        public string RmitID = "sXXXXXXX";
-        public string RmitPassword = "who_the_hell_knows_lol";
+        public const string RmitID = "sXXXXXXX";
+        public const string RmitPassword = "who_the_hell_knows_lol";
+        public const string Province = "Guangdong";
+        public const string City = "Shenzhen";
     }
 }
