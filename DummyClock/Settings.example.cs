@@ -15,5 +15,7 @@ namespace DummyClock
         public const string RmitPassword = "who_the_hell_knows_lol";
         public const string Province = "Guangdong";
         public const string City = "Shenzhen";
+        public static string PtvDeveloperID = "1xxxxxxx";
+        public static string PtvSecurityKey = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx";
     }
 }

@@ -21,12 +21,12 @@
             <ColumnDefinition Width="200*"/>
         </Grid.ColumnDefinitions>
 
-        
+
         <!-- Top-left Grid -->
-        <Grid x:Name="TopLeftGrid" Background="Black" HorizontalAlignment="Left" Height="240" VerticalAlignment="Top" Width="400">
-            <TextBlock x:Name="MainTimeTextblock" HorizontalAlignment="Left" Height="141" Margin="28,0,0,0" TextWrapping="Wrap" Text="00 : 00"  VerticalAlignment="Top" Width="344" Foreground="White" TextAlignment="Center" FontSize="100" />
-            <TextBlock HorizontalAlignment="Left" Margin="0,131,0,0" TextWrapping="Wrap" Text="Saturday, March 16 2017" VerticalAlignment="Top" Foreground="White" FontSize="30" Width="400" TextAlignment="Center"/>
-            <TextBlock HorizontalAlignment="Left" Margin="0,171,0,0" TextWrapping="Wrap" Text="农历 x月y日" VerticalAlignment="Top" Foreground="White" FontSize="30" Width="400" TextAlignment="Center"/>
+        <Grid x:Name="TopLeftGrid" Background="Black" HorizontalAlignment="Left" Height="240" VerticalAlignment="Center" Width="400">
+            <TextBlock x:Name="MainTimeTextblock" HorizontalAlignment="Left" Height="126" Margin="28,10,0,0" TextWrapping="Wrap" Text="00:00"  VerticalAlignment="Top" Width="344"  Foreground="White" TextAlignment="Center" FontSize="125" FontFamily="Global Monospace" />
+            <TextBlock x:Name="DateTextbox" HorizontalAlignment="Left" Margin="0,139,0,0" TextWrapping="Wrap" Text="Saturday, March 16 2017" VerticalAlignment="Top" Foreground="White" FontSize="30" Width="400" TextAlignment="Center"/>
+            <TextBlock x:Name="LunarCalendarTextbox" HorizontalAlignment="Left" Margin="0,181,0,0" TextWrapping="Wrap" Text="农历 x月y日" VerticalAlignment="Top" Foreground="White" FontSize="30" Width="400" TextAlignment="Center"/>
             <Line Y1="240" Y2="240" X1="0" X2="400" Stroke="White" StrokeThickness="3" Canvas.ZIndex="1"/>
         </Grid>
 
@@ -56,16 +56,16 @@
             <StackPanel x:Name="CurrentWeatherPanel" Width="200" Height="240" VerticalAlignment="Top">
                 <TextBlock x:Name="CurrentWeatherIconTextbox" Text="☀️" FontSize="72" TextAlignment="Center" Height="105"/>
                 <TextBlock x:Name="CurrentWeatherTempTextbox"  Text="15/25℃" FontSize="39" Foreground="White" TextAlignment="Center"/>
-                <TextBlock x:Name="CurrentWeatherDetailedTextbox" Text="Sunny" Foreground="White" TextAlignment="Center" FontSize="30"/>
+                <TextBlock x:Name="CurrentWeatherDetailedTextbox" Text="Sunny" Foreground="White" TextAlignment="Center" FontSize="20"/>
             </StackPanel>
 
             <StackPanel x:Name="TomorrowWeatherPanel" Width="200" Height="240"  VerticalAlignment="Bottom">
                 <TextBlock x:Name="TomorrowWeatherIconTextbox" Text="🌧️" FontSize="72" TextAlignment="Center" Height="105"/>
                 <TextBlock x:Name="TomorrowWeatherTempTextbox"  Text="15/25℃" FontSize="39" Foreground="White" TextAlignment="Center"/>
-                <TextBlock x:Name="TomorrowWeatherDetailedTextbox" Text="Rainy" Foreground="White" TextAlignment="Center" FontSize="30"/>
+                <TextBlock x:Name="TomorrowWeatherDetailedTextbox" Text="Rainy" Foreground="White" TextAlignment="Center" FontSize="20"/>
             </StackPanel>
-            
-            
+
+
         </StackPanel>
 
         <!-- Bottom-right Grid -->
@@ -78,9 +78,9 @@
                 </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding TitleString}" FontSize="17" FontWeight="SemiBold" Foreground="SandyBrown" Margin="0,0,0,5"/>
-                            <TextBlock Text="{Binding DetailedString}" FontSize="15" Foreground="White"  Opacity="0.9" Margin="0,0,0,5"/>
+                        <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                            <TextBlock Text="{Binding TitleString}" FontSize="35" FontWeight="Bold" Foreground="White" Margin="0,0,10,15"/>
+                            <TextBlock Text="{Binding DetailedString}" FontSize="20" Foreground="#FF419393" Margin="0,0,0,0" FontWeight="Bold" VerticalAlignment="Center"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

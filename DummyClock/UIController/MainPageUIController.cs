@@ -8,23 +8,80 @@ using RmiterCoreUwp.MyRmit;
 using DummyClock.UIBindings;
 using YahooWeatherParser.Uwp;
 using YahooWeatherParser.Shared;
+using PtvCore.Timetable;
+using System.Security.Cryptography;
+using Windows.UI;
+using Windows.UI.Xaml.Media;
 
 namespace DummyClock.UIController
 {
     public class MainPageUIController
     {
-        public async Task<List<WeatherControlBindings>> GetWeatherInfo()
+        public async Task<List<PtvTimetableBinding>> GetPtvInfo()
         {
-            var ywasync = new YahooWeatherControl(true);
-            var result = await ywasync.DoQuery("Melbourne", "Victoria");
+            var client = new TimetableClient(
+                Settings.PtvDeveloperID,
+                Settings.PtvSecurityKey,
+                (input, key) =>
+                {
+                    var provider = new HMACSHA1(key);
+                    var hash = provider.ComputeHash(input);
+                    return hash;
+                });
 
-            var forecastStatus = result.Results.Channel.Item.Forecast;
-            var currentStatus = result.Results.Channel.Item.Condition;
+            var searchResults = await client.SearchAsync(Settings.PtvStationName);
+            var stopResults = (Stop)searchResults[0];
 
-            string currentTemp = currentStatus.Temperature.ToString();
-            string tomorrowForecast = forecastStatus[1].High.ToString() + "/" + forecastStatus[1].Low.ToString() + "℃";
+            var lineResults = await client.SearchLineByModeAsync(Settings.PtvLineName, TransportType.Train);
+            var departResults = await client.GetBroadNextDeparturesAsync(TransportType.Train, stopResults.StopID, 3);
 
-            return null;
+            var ptvBindingList = new List<PtvTimetableBinding>();
+
+            // Use for loop here to limit the result amount to 3. 
+            // In fact alothough I've set the amount limit, PTV API always returns more than 3.
+            for(int i = 0; i <= 2; i++)
+            {
+                var departItem = departResults[i];
+                ptvBindingList.Add(new PtvTimetableBinding()
+                {
+                    DetailedString = string.Format("to {0}", departItem.Platform.Direction.DirectionName),
+                    TitleString = string.Format("{0} min ", ((int)((departItem.EstimatedTime.Value.ToLocalTime() - DateTime.Now).TotalMinutes)).ToString())
+                });
+
+               
+            }
+
+            if(ptvBindingList.Count == 0)
+            {
+                ptvBindingList.Add(new PtvTimetableBinding()
+                {
+                    DetailedString = string.Format(" {0}", "No data"),
+                    TitleString = string.Format("{0}", "⁉️")
+                });
+            }
+
+            return ptvBindingList;
+        }
+
+        public async Task<WeatherControlBindings> GetWeatherInfo()
+        { 
+            var yahooWeatherControl = new YahooWeatherControl(true);
+            var yahooResult = await yahooWeatherControl.DoQuery("Melbourne", "Victoria");
+
+            var forecastStatus = yahooResult.Results.Channel.Item.Forecast;
+            var currentStatus = yahooResult.Results.Channel.Item.Condition;
+
+            var weatherData = new WeatherControlBindings()
+            {
+                TodayTemp = currentStatus.Temperature.ToString() + "℃",
+                TomorrowTemp = forecastStatus[1].Low.ToString() + "/" + forecastStatus[1].High.ToString() + "℃",
+                TodayCondition = currentStatus.StatusText,
+                TomorrowCondition = forecastStatus[1].StatusText,
+                TodayEmoji = GetWeatherEmoji(currentStatus.Code),
+                TomorrowEmoji = GetWeatherEmoji(forecastStatus[1].Code)
+            };
+
+            return weatherData;
         }
 
         public async Task<List<RmitTimetableBindings>> GetUniTimetables()
@@ -42,7 +99,7 @@ namespace DummyClock.UIController
             var timetableListContent = new List<RmitTimetableBindings>();
 
             // Set to 
-            foreach (var timetableForToday in timetableResult.WeeklyTimetable[0].DailyTimetable)
+            foreach (var timetableForToday in timetableResult.WeeklyTimetable[dayOfWeek].DailyTimetable)
             {
                 var tableContent = new RmitTimetableBindings()
                 {
@@ -57,11 +114,21 @@ namespace DummyClock.UIController
                 timetableListContent.Add(tableContent);
             }
 
+            if(timetableListContent.Count == 0)
+            {
+                timetableListContent.Add(new RmitTimetableBindings()
+                {
+                    TitleString = "No class for today.",
+                    DetailedString = "You've got a day off!"
+                });
+            }
+
             return timetableListContent;
         }
 
         private string GetWeatherEmoji(ConditionCode conditionCode)
         {
+            // Grab the damn condition code and match 
             string emoji = string.Empty;
 
             switch(conditionCode)
@@ -82,6 +149,7 @@ namespace DummyClock.UIController
 
                 case ConditionCode.MostlyCloudyAtDay:
                 case ConditionCode.MostlyCloudyAtNight:
+                case ConditionCode.PartlyCloudyAtNight: // No "moon with cloud" emoji available lol
                 case ConditionCode.Cloudy:
                     {
                         emoji = "☁️";
@@ -89,6 +157,7 @@ namespace DummyClock.UIController
                     }
 
                 case ConditionCode.ClearAtNight:
+                case ConditionCode.FairAtNight:
                     {
                         emoji = "🌙";
                         break;

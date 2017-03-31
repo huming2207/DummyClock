@@ -118,7 +118,6 @@
     <Compile Include="Timetable\DetailedResult.cs" />
     <Compile Include="Timetable\Direction.cs" />
     <Compile Include="Timetable\Disruption.cs" />
-    <Compile Include="Timetable\DisruptionArray.cs" />
     <Compile Include="Timetable\DisruptionConverter.cs" />
     <Compile Include="Timetable\Gps.cs" />
     <Compile Include="Timetable\Health.cs" />
