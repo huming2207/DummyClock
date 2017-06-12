@@ -9,6 +9,7 @@ Basically it just an Windows 10 UWP app to keep displaying information, includin
 - RMIT Timetable, based on my [RMITer](https://github.com/huming2207/Rmiter) project
 - PTV public transport timetable, based on [Ptv.Net](https://github.com/huming2207/Ptv.Net) project
 - Yahoo weather, based on my [YahooWeather.Net](https://github.com/huming2207/YahooWeatherDotNet) project
+- Time and calendar, including standard (Gregorian) calendar and [Chinese lunar calendar](https://en.wikipedia.org/wiki/Chinese_calendar)
 
 Let's have a look for some pics.
 
